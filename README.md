@@ -1,8 +1,8 @@
-appapi_user_example
+GoodBarber App SDK - User example
 ======================
 ## General Info
 ***
-Using the GoodBarber App API you can get informations about the current user logged into your application.
+Using the GoodBarber App SDK you can get informations about the current user logged into your application.
 This project shows you how to do it.
 
 This code can be user inside a Custom code section, when the there's a user logged into the app, it displays the ID card of the user.
