@@ -1,3 +1,6 @@
+var qrcode;
+
+
 /**
  * Success callback that will be called if the `gb.user.getCurrent` call is successful
  * @param {*} userInfo Contains all the data related to the user
@@ -30,7 +33,9 @@ function getInfoUser() {
 
 function generateQrCode(userInfo) {
     if(userInfo.email) {
-        new QRCode(document.getElementById("qrcode"), `mailto:${userInfo.email}`);
+        qrcode = new QRCode(document.getElementById("qrcode"), `mailto:${userInfo.email}`);
+    } else {
+        qrcode && qrcode.clear();
     }
 }
 
@@ -42,7 +47,6 @@ function displayLoginButton(){
 
 function displayUserInfo(userName, pictureUrl) {
     hideElements();
-    console.log("pictureUrl", pictureUrl);
     let userCard = document.getElementById("user-card");
     userCard.style.display = "flex";
     let nameComponent = document.getElementById("user-name");
@@ -59,9 +63,14 @@ function hideElements() {
     let cardContainer = document.getElementById("user-card");
     cardContainer.style.display = "none";
     loginContainer.style.display = "none";
+    qrcode && qrcode.clear();
 }
 
-// On login callback will be call when the user logs in
+// On login callback will be call when the user logs in.
 gb.user.onlogin = getInfoUser;
-gb.user.onlogout = getInfoUser;
+// On logout callback will be call when the user logs out.
+gb.user.onlogout = hideElements;
+// On update callback will be call if the user has been updated.
+gb.user.onupdate = getInfoUser;
+// On load callback will be call when the page finish to load.
 gb.onload = getInfoUser;
