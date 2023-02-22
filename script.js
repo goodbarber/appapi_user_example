@@ -8,10 +8,8 @@ var qrcode;
 function getCurrentUserSuccessCallback(userInfo) {
     let userName = "";
     if(userInfo.username) {
-        // UserInfo properties on classic
         userName = userInfo.username;
     } else {
-        // UserInfo properties on commerce and IAP
         let firstName = userInfo.first_name;
         let lastName = userInfo.last_name;
         if(lastName && firstName) userName = `${firstName} ${lastName}`;
