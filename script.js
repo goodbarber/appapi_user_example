@@ -6,7 +6,16 @@ var qrcode;
  * @param {*} userInfo Contains all the data related to the user
  */
 function getCurrentUserSuccessCallback(userInfo) {
-    let userName = userInfo.username;
+    let userName = "";
+    if(userInfo.username) {
+        // UserInfo properties on classic
+        userName = userInfo.username;
+    } else {
+        // UserInfo properties on commerce and IAP
+        let firstName = userInfo.first_name;
+        let lastName = userInfo.last_name;
+        if(lastName && firstName) userName = `${firstName} ${lastName}`;
+    }
     let pictureUrl = userInfo.picture_url;
     displayUserInfo(userName, pictureUrl);
     generateQrCode(userInfo);
