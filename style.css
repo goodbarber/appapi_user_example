@@ -1,0 +1,78 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.user-card {
+    margin: auto;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* height: 300px; */
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    background: rgb(254,119,1);
+    background: linear-gradient(200deg, rgba(254,243,0,1) 0%, rgba(254,119,1,1) 100%);
+    padding: 30px 50px 30px 50px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+}
+
+.user-card > div {
+    margin-top: 10px;
+}
+
+.login-btn {
+    margin: auto;
+    background: #5E5DF0;
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    border: 2px solid white;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: rgb(192, 192, 192);
+}
+
+.avatar img {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+    display: none;
+}
+
+#qrcode {
+    width:130px;
+    height:130px;
+    /* margin-top:15px; */
+}
+#qrcode img{
+    width:100%;
+    /* margin-top:15px; */
+}
