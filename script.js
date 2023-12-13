@@ -23,8 +23,12 @@ function getCurrentUserSuccessCallback(userInfo) {
  * Error callback that will be called if the `gb.user.getCurrent` call fails
  * @param {*} error The error object that contains error information
  */
-function getCurrentUserErrorCallback(error) {
-    displayLoginButton();
+function getCurrentUserErrorCallback() {
+	let userInfo = {"username":"John Doe","email":"john@doe.com","picture_url":""};
+	let userName = userInfo.username;
+	let pictureUrl = userInfo.picture_url;
+    displayUserInfo(userName, pictureUrl);
+    generateQrCode(userInfo);
 }
 
 /**
@@ -39,21 +43,18 @@ function getInfoUser() {
 /* RENDER FUNCTIONS (not related to the toolkit) */
 
 function generateQrCode(userInfo) {
-    if(userInfo.email) {
+    if(userInfo.email && (typeof qrcode == "undefined")) {
         qrcode = new QRCode(document.getElementById("qrcode"), `mailto:${userInfo.email}`);
     } else {
         qrcode && qrcode.clear();
     }
 }
 
-function displayLoginButton(){
-    hideElements();
-    let loginButton = document.getElementById("login-btn");
-    loginButton.style.display = "block";
-}
-
 function displayUserInfo(userName, pictureUrl) {
-    hideElements();
+	if(document.querySelector(".login-btn")){
+		let loginButton = document.getElementById("login-btn");
+		loginButton.style.display = "none";
+	}
     let userCard = document.getElementById("user-card");
     userCard.style.display = "flex";
     let nameComponent = document.getElementById("user-name");
@@ -66,18 +67,13 @@ function displayUserInfo(userName, pictureUrl) {
 }
 
 function hideElements() {
-    let loginContainer = document.getElementById("login-btn");
-    let cardContainer = document.getElementById("user-card");
+	let cardContainer = document.getElementById("user-card");
     cardContainer.style.display = "none";
-    loginContainer.style.display = "none";
     qrcode && qrcode.clear();
 }
 
-// On login callback will be call when the user logs in.
-gb.user.onlogin = getInfoUser;
-// On logout callback will be call when the user logs out.
-gb.user.onlogout = hideElements;
+
 // On update callback will be call if the user has been updated.
 gb.user.onupdate = getInfoUser;
-// On load callback will be call when the page finish to load.
-gb.onload = getInfoUser;
+// On appear callback will be call when the web view finish to load.
+gb.onappear = getInfoUser;
